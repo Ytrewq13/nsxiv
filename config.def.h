@@ -1,78 +1,62 @@
-#ifdef _WINDOW_CONFIG
+#ifndef SXIV_CONFIG_H
+#define SXIV_CONFIG_H
+#include "sxiv.h"
 
 /* default window dimensions (overwritten via -g option): */
-enum {
-	WIN_WIDTH  = 800,
-	WIN_HEIGHT = 600
-};
-
-/* colors and font are configured with 'background', 'foreground' and
- * 'font' X resource properties.
- * See X(7) section Resources and xrdb(1) for more information.
- */
-
-#endif
-
-#ifdef _TITLE_CONFIG
+int WIN_WIDTH __attribute__((weak)) = 800;
+int WIN_HEIGHT __attribute__((weak))  = 600;
 
 /* default title prefix */
-static const char *TITLE_PREFIX = "sxiv - ";
+const char *TITLE_PREFIX __attribute__((weak)) = "sxiv - ";
 
 /* default title suffixmode, available options are:
  * SUFFIX_EMPTY
  * SUFFIX_BASENAME
  * SUFFIX_FULLPATH
  */
-static const suffixmode_t TITLE_SUFFIXMODE = SUFFIX_BASENAME;
-
-#endif
-
-#ifdef _IMAGE_CONFIG
+const suffixmode_t TITLE_SUFFIXMODE __attribute__((weak)) = SUFFIX_BASENAME;
 
 /* levels (in percent) to use when zooming via '-' and '+':
  * (first/last value is used as min/max zoom level)
  */
-static const float zoom_levels[] = {
+const float zoom_levels[] __attribute__((weak)) = {
 	 12.5,  25.0,  50.0,  75.0,
 	100.0, 150.0, 200.0, 400.0, 800.0
 };
 
+const int NUM_ZOOM_LEVELS __attribute__((weak)) = ARRLEN(zoom_levels);
+
 /* default slideshow delay (in sec, overwritten via -S option): */
-enum { SLIDESHOW_DELAY = 5 };
+const int SLIDESHOW_DELAY __attribute__((weak)) = 5;
 
 /* gamma correction: the user-visible ranges [-GAMMA_RANGE, 0] and
  * (0, GAMMA_RANGE] are mapped to the ranges [0, 1], and (1, GAMMA_MAX].
  * */
-static const double GAMMA_MAX   = 10.0;
-static const int    GAMMA_RANGE = 32;
+const double GAMMA_MAX   __attribute__((weak)) = 10.0;
+const int    GAMMA_RANGE __attribute__((weak)) = 32;
 
 /* command i_scroll pans image 1/PAN_FRACTION of screen width/height */
-static const int PAN_FRACTION = 5;
+const int PAN_FRACTION __attribute__((weak)) = 5;
 
 /* if false, pixelate images at zoom level != 100%,
  * toggled with 'a' key binding
  */
-static const bool ANTI_ALIAS = true;
+const bool ANTI_ALIAS __attribute__((weak)) = true;
 
 /* if true, use a checkerboard background for alpha layer,
  * toggled with 'A' key binding
  */
-static const bool ALPHA_LAYER = false;
-
-#endif
-#ifdef _THUMBS_CONFIG
+const bool ALPHA_LAYER __attribute__((weak)) = false;
 
 /* thumbnail sizes in pixels (width == height): */
-static const int thumb_sizes[] = { 32, 64, 96, 128, 160 };
+const int thumb_sizes[] __attribute__((weak)) = { 32, 64, 96, 128, 160 };
+const int NUM_THUMBS = ARRLEN(thumb_sizes);
 
 /* thumbnail size at startup, index into thumb_sizes[]: */
-static const int THUMB_SIZE = 3;
-
-#endif
-#ifdef _MAPPINGS_CONFIG
+const int THUMB_SIZE __attribute__((weak)) = 3;
 
 /* keyboard mappings for image and thumbnail mode: */
-static const keymap_t keys[] = {
+const keymap_t keys[] __attribute__((weak)) = {
 	/* modifiers    key               function              argument */
 	{ 0,            XK_q,             g_quit,               None },
 	{ 0,            XK_Return,        g_switch_mode,        None },
@@ -157,7 +141,7 @@ static const keymap_t keys[] = {
 };
 
 /* mouse button mappings for image mode: */
-static const button_t buttons[] = {
+const button_t buttons[] __attribute__((weak)) = {
 	/* modifiers    button            function              argument */
 	{ 0,            1,                i_cursor_navigate,    None },
 	{ 0,            2,                i_drag,               DRAG_ABSOLUTE },

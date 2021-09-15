@@ -34,7 +34,7 @@ CPPFLAGS = -D_XOPEN_SOURCE=700 \
 LDLIBS = -lImlib2 -lX11 -lXft -lfontconfig $(OPTIONAL_LIBS)
 
 OBJS = autoreload_$(AUTORELOAD).o commands.o image.o main.o options.o \
-  thumbs.o util.o window.o
+  thumbs.o util.o window.o config.o
 
 .PHONY: all clean install uninstall
 .SUFFIXES:
@@ -66,6 +66,10 @@ config.mk:
 config.h:
 	@echo "GEN $@"
 	cp config.def.h $@
+
+config.c:
+	@echo "GEN $@"
+	echo '#include "config.h"' > $@
 
 version.h: Makefile .git/index
 	@echo "GEN $@"

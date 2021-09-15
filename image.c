@@ -18,7 +18,7 @@
 
 #include "sxiv.h"
 #define _IMAGE_CONFIG
-#include "config.h"
+#include "config_defs.h"
 
 #include <errno.h>
 #include <stdlib.h>
@@ -47,7 +47,7 @@ static int zoomdiff(img_t *img, float z)
 void img_init(img_t *img, win_t *win)
 {
 	zoom_min = zoom_levels[0] / 100.0;
-	zoom_max = zoom_levels[ARRLEN(zoom_levels) - 1] / 100.0;
+	zoom_max = zoom_levels[NUM_ZOOM_LEVELS - 1] / 100.0;
 
 	imlib_context_set_display(win->env.dpy);
 	imlib_context_set_visual(win->env.vis);
@@ -568,7 +568,7 @@ bool img_zoom_in(img_t *img)
 	int i;
 	float z;
 
-	for (i = 0; i < ARRLEN(zoom_levels); i++) {
+	for (i = 0; i < NUM_ZOOM_LEVELS; i++) {
 		z = zoom_levels[i] / 100.0;
 		if (zoomdiff(img, z) > 0)
 			return img_zoom(img, z);
@@ -581,7 +581,7 @@ bool img_zoom_out(img_t *img)
 	int i;
 	float z;
 
-	for (i = ARRLEN(zoom_levels) - 1; i >= 0; i--) {
+	for (i = NUM_ZOOM_LEVELS - 1; i >= 0; i--) {
 		z = zoom_levels[i] / 100.0;
 		if (zoomdiff(img, z) < 0)
 			return img_zoom(img, z);

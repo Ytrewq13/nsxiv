@@ -17,9 +17,7 @@
  */
 
 #include "sxiv.h"
-#define _IMAGE_CONFIG
-#define _TITLE_CONFIG
-#include "config.h"
+#include "config_defs.h"
 #include "version.h"
 
 #include <stdlib.h>

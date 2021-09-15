@@ -18,7 +18,7 @@
 
 #include "sxiv.h"
 #define _MAPPINGS_CONFIG
-#include "config.h"
+#include "config.def.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -596,7 +596,7 @@ void on_keypress(XKeyEvent *kev)
 		/* number prefix for commands */
 		prefix = prefix * 10 + (int) (key - '0');
 		return;
-	} else for (i = 0; i < ARRLEN(keys); i++) {
+	} else for (i = 0; keys[i].ksym; i++) {
 		if (keys[i].ksym == ksym &&
 		    MODMASK(keys[i].mask | sh) == MODMASK(kev->state) &&
 		    keys[i].cmd >= 0 && keys[i].cmd < CMD_COUNT &&
@@ -621,7 +621,7 @@ void on_buttonpress(XButtonEvent *bev)
 		set_timeout(reset_cursor, TO_CURSOR_HIDE, true);
 		reset_cursor();
 
-		for (i = 0; i < ARRLEN(buttons); i++) {
+		for (i = 0; buttons[i].button; i++) {
 			if (buttons[i].button == bev->button &&
 			    MODMASK(buttons[i].mask) == MODMASK(bev->state) &&
 			    buttons[i].cmd >= 0 && buttons[i].cmd < CMD_COUNT &&
@@ -897,7 +897,7 @@ int main(int argc, char **argv)
 	filecnt = fileidx;
 	fileidx = options->startnum < filecnt ? options->startnum : 0;
 
-	for (i = 0; i < ARRLEN(buttons); i++) {
+	for (i = 0; buttons[i].button; i++) {
 		if (buttons[i].cmd == i_cursor_navigate) {
 			imgcursor[0] = CURSOR_LEFT;
 			imgcursor[2] = CURSOR_RIGHT;

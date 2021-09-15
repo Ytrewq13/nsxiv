@@ -17,8 +17,7 @@
  */
 
 #include "sxiv.h"
-#define _THUMBS_CONFIG
-#include "config.h"
+#include "config_defs.h"
 
 #include <errno.h>
 #include <stdlib.h>
@@ -226,7 +225,7 @@ Imlib_Image tns_scale_down(Imlib_Image im, int dim)
 
 bool tns_load(tns_t *tns, int n, bool force, bool cache_only)
 {
-	int maxwh = thumb_sizes[ARRLEN(thumb_sizes)-1];
+	int maxwh = thumb_sizes[NUM_THUMBS-1];
 	bool cache_hit = false;
 	char *cfile;
 	thumb_t *t;
@@ -566,7 +565,7 @@ bool tns_zoom(tns_t *tns, int d)
 	oldzl = tns->zl;
 	tns->zl += -(d < 0) + (d > 0);
 	tns->zl = MAX(tns->zl, 0);
-	tns->zl = MIN(tns->zl, ARRLEN(thumb_sizes)-1);
+	tns->zl = MIN(tns->zl, NUM_THUMBS-1);
 
 	tns->bw = ((thumb_sizes[tns->zl] - 1) >> 5) + 1;
 	tns->bw = MIN(tns->bw, 4);
