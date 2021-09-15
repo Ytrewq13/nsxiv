@@ -65,7 +65,7 @@ config.mk:
 
 config.h:
 	@echo "GEN $@"
-	cp config.def.h $@
+	sed "s/__attribute__((weak))//g" config.def.h > $@
 
 config.c:
 	@echo "GEN $@"

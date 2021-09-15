@@ -50,7 +50,7 @@ const bool ALPHA_LAYER __attribute__((weak)) = false;
 
 /* thumbnail sizes in pixels (width == height): */
 const int thumb_sizes[] __attribute__((weak)) = { 32, 64, 96, 128, 160 };
-const int NUM_THUMBS = ARRLEN(thumb_sizes);
+const int NUM_THUMBS __attribute__((weak)) = ARRLEN(thumb_sizes);
 
 /* thumbnail size at startup, index into thumb_sizes[]: */
 const int THUMB_SIZE __attribute__((weak)) = 3;
