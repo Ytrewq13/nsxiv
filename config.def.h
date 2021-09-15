@@ -138,6 +138,7 @@ const keymap_t keys[] __attribute__((weak)) = {
 	{ 0,            XK_a,             i_toggle_antialias,   None },
 	{ 0,            XK_A,             i_toggle_alpha,       None },
 	{ 0,            XK_s,             i_slideshow,          None },
+	{0},
 };
 
 /* mouse button mappings for image mode: */
@@ -148,6 +149,7 @@ const button_t buttons[] __attribute__((weak)) = {
 	{ 0,            3,                g_switch_mode,        None },
 	{ 0,            4,                g_zoom,               +1 },
 	{ 0,            5,                g_zoom,               -1 },
+	{0},
 };
 
 #endif
